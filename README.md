@@ -30,3 +30,9 @@ Para atender aos critérios de validação acadêmica exigidos, foi construída 
 * **Validação de Agendamento Retroativo**: Assegura que o sistema lança a exceção correta ao tentar marcar consultas no passado.
 * **Validação da Regra de Cancelamento**: Verifica se a restrição de antecedência mínima de 24 horas bloqueia cancelamentos prematuros.
 * **Cobertura Verde (100% Passed)**: Todos os testes de regras de negócio e integridade estrutural executam e passam com sucesso através do comando nativo do framework.
+
+---
+
+<div align="center">
+  <p><strong>SOFTWARE MEDISCHEDULE DESENVOLVIDO POR GIAN LYRIO © 2026</strong></p>
+</div>
