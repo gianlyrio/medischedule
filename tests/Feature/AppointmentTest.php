@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Models\Appointment;
 use App\Models\Doctor;
 use App\Models\Specialty;
 use App\Models\User;
@@ -72,11 +71,11 @@ class AppointmentTest extends TestCase
 
         $service = new AppointmentService();
 
-        // Criamos o agendamento através do service (garantindo que todos os campos da tabela sejam preenchidos perfeitamente)
+        // Usa o service para criar o agendamento de forma limpa (daqui a 10 horas)
         $appointment = $service->schedule([
             'patient_id' => $patient->id,
             'doctor_id' => $doctor->id,
-            'appointment_date' => Carbon::now()->addHours(10), // Apenas 10h no futuro (viola a regra de 24h)
+            'appointment_date' => Carbon::now()->addHours(10),
         ]);
 
         $this->expectException(Exception::class);
