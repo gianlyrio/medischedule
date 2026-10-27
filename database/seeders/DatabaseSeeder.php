@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
         User::create([
             'name' => 'Administrador MediSchedule',
             'email' => 'admin@medischedule.test',
-            'password' => Hash::make('password123'),
+            'password' => Hash::make('password'),
             'cpf' => '000.000.000-00',
             'phone' => '(24) 98888-0000',
             'role' => 'admin',
@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
         User::create([
             'name' => 'Paciente Teste',
             'email' => 'paciente@medischedule.test',
-            'password' => Hash::make('password123'),
+            'password' => Hash::make('password'),
             'cpf' => '111.111.111-11',
             'phone' => '(24) 97777-1111',
             'role' => 'patient',
