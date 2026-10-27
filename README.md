@@ -31,6 +31,14 @@ Para atender aos critérios de validação acadêmica exigidos, foi construída 
 * **Validação da Regra de Cancelamento**: Verifica se a restrição de antecedência mínima de 24 horas bloqueia cancelamentos prematuros.
 * **Cobertura Verde (100% Passed)**: Todos os testes de regras de negócio e integridade estrutural executam e passam com sucesso através do comando nativo do framework.
 
+## 4. 🔑 Credenciais dos Usuários de Teste
+
+Os acessos para demonstração são gerados automaticamente após a execução do comando `php artisan db:seed`:
+
+* **Administrador:** `admin@medischedule.test`
+* **Paciente:** `patient@medischedule.test`
+* **Senha padrão:** `password`
+
 ---
 
 <div align="center">
