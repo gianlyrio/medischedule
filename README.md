@@ -1,58 +1,32 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<div align="center">
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# 🩺 **M E D I S C H E D U L E**
+> **Plataforma Académica de Gestão e Agendamento Clínico**
 
-## About Laravel
+[🛡️ Arquitetura Segura](#) • [⚡ Laravel 13](#) • [🧪 100% Testado](#)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+</div>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Relatório de Desenvolvimento e Arquitetura do Sistema
 
-## Learning Laravel
+O **MediSchedule** foi desenvolvido como uma solução robusta em **Laravel 13** para gerenciar o fluxo completo de agendamentos médicos, unindo padrões acadêmicos de engenharia de software, segurança de dados e validações estritas de regras de negócio.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 1. Arquitetura e Tecnologias
+* **Framework**: Laravel 13 (PHP 8.5) adotando o padrão MVC (Model-View-Controller) combinado com Camada de Serviço (`Service Layer`).
+* **Persistência de Dados**: SQLite, utilizando migrações relacionais estritas com restrições de integridade (`foreign keys`, restrições `NOT NULL` em campos críticos como `cpf` e `crm`).
+* **Interface (UI/UX)**: Bootstrap 5 totalmente responsivo, contemplando painéis segregados para Administradores, Médicos e Pacientes, complementados por modais dinâmicos.
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 2. Regras de Negócio e Lógica Implementada (`AppointmentService`)
+A lógica central do sistema foi isolada em uma camada de serviço dedicada (`AppointmentService`), garantindo alta coesão e testabilidade:
+* **Prevenção de Agendamentos Retroativos**: Validação temporal rigorosa que rejeita qualquer tentativa de agendamento para datas ou horários anteriores ao momento atual.
+* **Gestão de Disponibilidade e Conflitos**: Bloqueio de sobreposição de horários para o mesmo profissional, respeitando os turnos e a duração dos blocos de atendimento (`slot_duration`).
+* **Política de Cancelamento (24h)**: Regra de negócio crítica que impede o cancelamento de consultas caso o intervalo entre a solicitação e o horário agendado seja inferior a 24 horas.
+* **Controle de Acesso Baseado em Papéis (RBAC)**: Proteção de rotas sensíveis por meio de middlewares personalizados (`auth` e verificação de `role`), garantindo que pacientes acedam apenas aos seus próprios agendamentos e médicos/admins gerenciem o sistema adequadamente.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
-```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
-```
-
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 3. Testes Automatizados e Qualidade de Software
+Para atender aos critérios de validação acadêmica exigidos, foi construída uma suíte de testes de funcionalidade (`Feature Tests`) utilizando o **PHPUnit** e a trait `RefreshDatabase` (com SQLite em memória):
+* **Validação de Agendamento Retroativo**: Assegura que o sistema lança a exceção correta ao tentar marcar consultas no passado.
+* **Validação da Regra de Cancelamento**: Verifica se a restrição de antecedência mínima de 24 horas bloqueia cancelamentos prematuros.
+* **Cobertura Verde (100% Passed)**: Todos os testes de regras de negócio e integridade estrutural executam e passam com sucesso através do comando nativo do framework.
