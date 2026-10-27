@@ -19,6 +19,10 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->string('cpf')->unique();
+            $table->string('phone');
+            $table->string('role')->default('patient'); // patiente / admin
+            $table->string('status')->default('active'); // active / inactive
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

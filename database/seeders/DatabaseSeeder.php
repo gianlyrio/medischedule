@@ -2,24 +2,39 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+Use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
+    // Criar Administrador padrão
+        User::create([
+            'name' => 'Administrador MediSchedule',
+            'email' => 'admin@medischedule.test',
+            'password' => Hash::make('password123'),
+            'cpf' => '000.000.000-00',
+            'phone' => '(24) 98888-0000',
+            'role' => 'admin',
+            'status' => 'active',
+        ]);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        // Criar Paciente de teste
+        User::create([
+            'name' => 'Paciente Teste',
+            'email' => 'paciente@medischedule.test',
+            'password' => Hash::make('password123'),
+            'cpf' => '111.111.111-11',
+            'phone' => '(24) 97777-1111',
+            'role' => 'patient',
+            'status' => 'active',
+        ]);
+
+        $this->call([
+            SpecialtySeeder::class,
+            DoctorSeeder::class,
         ]);
     }
 }
